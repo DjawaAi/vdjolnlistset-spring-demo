@@ -3,45 +3,43 @@ package com.vdjolnlistset.vdjolnlistsetspringd;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 @Service
 public class EmployeeService {
-    public List<Employee> employees;
+    public static List<Employee> employees = new ArrayList<>(List.of());
+    public static final int maxNumber = 5;
 
-
-    public EmployeeService(List<Employee> employees) {
-        this.employees = employees;
-    }
-
-    public static void employAdd(List<Employee> employees) {
-        final int maxNumber = 5;
-        if (maxNumber >= employees.size()) {
-            if (employees.contains((Employee) employees)) {
-                throw new EmployeeAlreadyAddedException();
+    public static Object employAdd(String name, String secondName) {
+        Employee employee = new Employee(name, secondName);
+        if (maxNumber > employees.size()) {
+            if (employees.contains(employee)) {
+                return new EmployeeAlreadyAddedException();
             } else {
-                employees.add((Employee) employees);
+                employees.add(employee);
+                return String.valueOf(employee);
             }
         } else {
-            throw new EmployeeStorageIsFullException();
+            return new EmployeeStorageIsFullException();
         }
     }
 
-    public static void employRem(List<Employee> employees) {
-        if (employees.contains((Employee) employees)) {
-            employees.remove((Employee) employees);
+    public static Object employRem(String name, String secondName) {
+        Employee employee = new Employee(name, secondName);
+        if (employees.contains(employee)) {
+            employees.remove(employee);
+            return "Удален из списка " + employee;
         } else {
-            throw new EmployeeNotFoundException();
+            return new EmployeeNotFoundException();
         }
-
     }
 
-    public static String employFind(List<Employee> employees) {
-        if (employees.contains((Employee) employees)) {
-            return "Сотрудник с таким имененм и фамилией существует в этом списке";
+    public static Object employFind(String name, String secondName) {
+        Employee employee = new Employee(name, secondName);
+        if (employees.contains(employee)) {
+            return "Сотрудник " + employee + "в список найден";
         } else {
-            throw new EmployeeNotFoundException();
+            return new EmployeeNotFoundException();
         }
     }
 }

@@ -1,4 +1,4 @@
 package com.vdjolnlistset.vdjolnlistsetspringd;
 
-public class EmployeeAlreadyAddedException extends RuntimeException{
+public class EmployeeAlreadyAddedException extends RuntimeException {
 }
