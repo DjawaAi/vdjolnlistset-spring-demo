@@ -14,13 +14,14 @@ public class EmployeeService {
         Employee employee = new Employee(name, secondName);
         if (maxNumber > employees.size()) {
             if (employees.contains(employee)) {
-                return new EmployeeAlreadyAddedException();
+                throw  new EmployeeAlreadyAddedException();
             } else {
                 employees.add(employee);
-                return String.valueOf(employee);
+                //return String.valueOf(employee);
+                return employee;
             }
         } else {
-            return new EmployeeStorageIsFullException();
+            throw  new EmployeeStorageIsFullException();
         }
     }
 
